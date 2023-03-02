@@ -1,67 +1,76 @@
-# Requirements
-
-Before starting up the project, some modules/library/applications are required. Note that the application was developed and tested using a windows machine, hence the below listed requirements are tailored to a *windows machine*.
-
-* **python** - the latest version of python is required, as of the writing of this the version used in the application is `Python 3.10.5`. 
-
-* **pip** - As of of writing the version of pip used is `pip-22.2.2`. To ensure the latest version is installed `python -m pip install --upgrade pip`
-
-* **Polymophic** - It simplifies using inherited models in Django. To install the module on the console run `pip install django-polymorphic`. We follow-up by adding the `polymorphic` key word into the `INSTALLED_APPS`, in the `settings.py` file in the root directory of the project.
-
-  ```python
-  INSTALLED_APPS = [
-      'company',
-      'polymorphic',
-      'django.contrib.admin',
-      'django.contrib.auth',
-      'django.contrib.contenttypes',
-      'django.contrib.sessions',
-      'django.contrib.messages',
-      'django.contrib.staticfiles',
-  ]
-  ```
-
-
-
-* **pandas** - Its a data analysis and manipulation tool. To install it on the console run `pip install pandas`
-
-* **openpyxl** - It is a library to read or write excel files. To ensure functioning of pandas in extracting data from external excel file, ensure that the latest version of *openpyxl* is used. Run `pip install openpyxl`.
-
-* **xlsxwriter** - It is module used in the writing of worksheets in the format *.xlsx*. To install the latest module in the console run `pip install XlsxWriter`
-
-* **PyPDF2** - It is a pdf library used in the project for merging of pdf files. To install it, run `pip install PyPDF2`. Also to use the library ensure that **typing_extensions** are up to date, we do so by running `python -m pip install typing-extensions --upgrade`.
-
-* **WeasyPrint** -  It used to turn HTML pages into pdf. To make weasyprint run on a windows machine.
-
-  * Ensure latest python is installed
-
-  * Download and install latest version of **GTKS installer** -  https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases
-
-  * On the console run `python -m pip install weasyprint`
-
-    For detailed instruction of *WeasyPrint*  installation visit https://doc.courtbouillon.org/weasyprint/stable/first_steps.html
-
-* **App passwords** - It is a 16-digit passcode that gives a less secure app or device permission to access your Google Account. In this case it is used to grant Django the access of a gmail email account. To set up check https://support.google.com/accounts/answer/185833?hl=en
-
-  The *gmail* together with the *app password* are then feed-in to the *settings.py* file. The *gmail* as the `EMAIL_HOST_USER` and the *password* as the `EMAIL_HOST_PASSWORD`. An example of the Gmail_Email settings is as shown below:
-
-  ```python
-  EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-  EMAIL_HOST = 'smtp.gmail.com'
-  EMAIL_PORT = 587
-  EMAIL_HOST_USER = 'kevin.dev254@gmail.com'
-  EMAIL_HOST_PASSWORD = '16_digit passcode goes here'
-  EMAIL_USE_TLS = True
-  EMAIL_USE_SSL = False
-  ```
-
-  **Note** - For the purpose of submitting this project, using the above(i.e using google sever to send mail) is not used. But the code is available in the *settings.py* file, it is just commented out. To use it, uncomment the bit of code and use a *gmail* account with *app password* the as the `EMAIL_HOST_USER` and the *password* as the `EMAIL_HOST_PASSWORD`.  While uncommenting the code, comment the section for `# Email Settings - local host` , which contains code that sends the mail through the local sever host.
-
-# Running the Application
-
-With all the requirements properly installed, run the below commands simultaneously in two separate consoles. 
-
-* `python manage.py runserver` - This opens a server an provides a link to that leads to the displayed app.
-* `python -m smtpd -n -c DebuggingServer localhost:1025` - Opens up server for the sending of the attached email.
-
-Note that the above commands are for running the app in development mode in a *windows machine*.
+arabic-reshaper==2.1.3
+asgiref==3.5.2
+asn1crypto==1.5.1
+Brotli==1.0.9
+certifi==2022.6.15
+cffi==1.15.1
+charset-normalizer==2.1.0
+click==8.1.3
+colorama==0.4.5
+cryptography==37.0.4
+cssselect2==0.6.0
+distlib==0.3.6
+Django==4.0.6
+django-polymorphic==3.1.0
+django-puppeteer-pdf==0.1.4
+django-wkhtmltopdf==3.4.0
+et-xmlfile==1.1.0
+filelock==3.8.0
+Flask==2.2.2
+flask-marshmallow==0.14.0
+Flask-SQLAlchemy==2.5.1
+fonttools==4.34.4
+future==0.18.2
+greenlet==1.1.3
+html5lib==1.1
+idna==3.3
+itsdangerous==2.1.2
+Jinja2==3.1.2
+lxml==4.9.1
+markdown2==2.4.8
+MarkupSafe==2.1.1
+marshmallow==3.17.1
+marshmallow-sqlalchemy==0.28.1
+numpy==1.23.1
+openpyxl==3.0.10
+oscrypto==1.3.0
+packaging==21.3
+pandas==1.4.3
+Pillow==9.2.0
+pipenv==2022.9.21
+platformdirs==2.5.2
+pycparser==2.21
+pydyf==0.2.0
+pyHanko==0.13.2
+pyhanko-certvalidator==0.19.5
+pyparsing==3.0.9
+PyPDF2==2.9.0
+PyPDF3==1.0.6
+pyphen==0.12.0
+python-bidi==0.4.2
+python-dateutil==2.8.2
+pytz==2022.1
+pytz-deprecation-shim==0.1.0.post0
+PyYAML==6.0
+qrcode==7.3.1
+reportlab==3.6.10
+requests==2.28.1
+six==1.16.0
+SQLAlchemy==1.4.40
+sqlparse==0.4.2
+svglib==1.3.0
+tinycss2==1.1.1
+tqdm==4.64.0
+tzdata==2022.1
+tzlocal==4.2
+uritools==4.0.0
+urllib3==1.26.10
+virtualenv==20.16.5
+virtualenv-clone==0.5.7
+weasyprint==56.0
+webencodings==0.5.1
+Werkzeug==2.2.2
+xhtml2pdf==0.2.8
+XlsxWriter==3.0.3
+xlwt==1.3.0
+zopfli==0.2.1
