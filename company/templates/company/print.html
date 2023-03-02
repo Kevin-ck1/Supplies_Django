@@ -1,0 +1,118 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="{% static 'company/styles_print.css' %}?{% now 'U' %}" rel="stylesheet" type="text/css" >
+    <script src="{% static 'company/jobDetails.js' %}"></script>
+</head>
+<body>
+    <h1>ABC SUPPLIES</h1>
+    <div class="header">
+        <div class="company_details">
+            <P>Dealers in: General Supplies</P>
+            <p>P.O Box: 123-234</p>
+            <p>Email:</p>
+        </div>
+
+        <div>
+            {% if type.title == "Invoice" %}
+                <p>{{type.title}} # - {{notes.invoiceNo}}</p>
+            {% elif type.title == "Delivery" %}
+                <p>{{type.title}} # - {{notes.deliveryNo}}</p>
+            {% elif type.title == "Receipt" %}
+                <p>{{type.title }}# - {{notes.receiptNo}}</p>
+            {%else%}
+            <p></p>
+            {%endif%}
+        </div>
+    </div>
+
+    <div style="display: flex; justify-content: center;">
+        <h3>{{type.body}}</h3>
+    </div>
+
+    <div class="doc_details">
+        <div class="card">
+            <p class="items">M/S</p>
+            <h4 class="items">{{job.client}}</h4>
+            <p class="items">B.O BOX: {{job.client.address}}</p>
+            <p class="items">Email: {{job.client.email}}</p>
+        </div>
+        <div >
+            <p class="rfqDate">DATE: {{date}}</p>
+            <p>RFQ No. {{job.code}}</p>
+            {%if job.LPONo%}
+                <p>LPO No. {{job.LPONo}}</p>
+            {%endif%}
+            {%if type.title != "Delivery" %}
+                <p>Supply Value {{job.value}} KSH</p>
+            {%endif%}
+        </div>
+    </div>
+
+    <hr>
+
+    <div>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" style="width:3%" class="text-center">#</th>
+                <th scope="col" style="width:20%" class="text-center">Name</th>
+                <th scope="col" style="width:18%" class="text-center">Category</th>
+                <th scope="col" style="width:18%" class="text-center">QTY</th>
+                {%if type.title != "Delivery" %}
+                    <th scope="col" style="width:18%" class="text-center">Price</th>
+                    <th scope="col" style="width:18%" class="text-center">Total</th>
+                {%endif%}
+                
+              </tr>
+            </thead>
+            <tbody id="suppliesTable">
+                {% for supply in supplies %}
+                    <tr id="{{supply.id}}">
+                        <th scope="row" class="rowCounter text-center"></th>
+                        <td id="name" class="text-center" >{{supply.product.nameP}} : {{supply.product.brand}} </td>
+                        <td id="category" class="text-center">{{supply.product.category}}</td>
+                        <td id="qty" class="text-center">{{supply.qty}}</td>
+                        {%if type.title != "Delivery" %}
+                            <td id="price" class="text-center">{{supply.price}}</td>
+                            <td id="total" class="text-center">{{supply.total}}</td>
+                        {%endif%}
+                    </tr>
+                {% endfor %}
+                <tr id="hiddenRow" style="display: none;">
+                    <th scope="row" class="rowCounter text-center"></th>
+                    <td class="text-center">
+                        <input type="text" class="productName form-control filterInput">
+                        <ul class="list-group list-group-flush" id="searchList"></ul>
+                    </td>
+                    <td class="text-center"><input type="text" class="category form-control" disabled></td>
+                    <td id="qty" class="text-center"><input type="text" class="qty form-control" disabled></td>
+                    <td id="price" class="text-center"><input type="text" class="price form-control" disabled></td>
+                    <td id="total" class="text-center"><input type="text" class="total form-control" disabled></td>
+                    <td class="d-flex justify-content-center">
+                        <button id="saveProduct" class="pr-1 btn btn-lg text-dark" >
+                            <i class="fa fa-check"></i>
+                        </button>
+                        <button id="cancelButton" class="pl-0 btn btn-lg text-dark">
+                            <i class="fa fa-ban"></i>
+                        </button>
+                    </td>    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+<!-- <script>
+    window.addEventListener('DOMContentLoaded', ()=>{
+        document.querySelector('.rfqDate').innerHTML = "Hello"
+    });
+</script> -->
+</html>
+
